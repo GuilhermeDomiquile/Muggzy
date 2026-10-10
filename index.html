@@ -114,13 +114,54 @@ footer p{max-width:36ch;margin-top:1rem}.legal{grid-column:1/-1;border-top:1px s
 .tag{display:inline-block;font:500 .85rem var(--body);color:var(--muted);border:1px solid var(--line);border-radius:3px;padding:.2rem .65rem;margin-bottom:1rem}
 .products article{border-top:1px solid var(--black);padding-top:1.6rem}
 @media(max-width:960px){.hgrid{grid-template-columns:1fr;gap:1.5rem}.three{grid-template-columns:1fr;gap:2rem}.brand{margin-bottom:2rem}}
+
+.mbtn,.mbar,.mmenu{display:none}
+@media(max-width:700px){
+  html{scroll-padding-top:72px}html,body{overflow-x:clip}
+  body{font-size:1rem;padding-bottom:84px}
+  .wrap{width:calc(100% - 2.5rem)}section{padding:3.5rem 0}
+  .ann{font-size:.8rem;line-height:1.35;padding:.55rem .9rem}
+  nav .wrap{height:60px}.logo{font-size:1.6rem}nav .btn{padding:.55rem 1rem;font-size:.88rem}
+  nav ul{margin-left:auto;margin-right:.6rem}
+  .mbtn{display:grid;align-content:center;gap:6px;width:44px;height:44px;margin-right:-.5rem;background:none;border:0;cursor:pointer;padding:0 11px}
+  .mbtn i{display:block;height:2px;background:var(--black);transition:transform .25s}
+  nav.open .mbtn i:first-child{transform:translateY(4px) rotate(45deg)}nav.open .mbtn i:last-child{transform:translateY(-4px) rotate(-45deg)}
+  .mmenu{position:absolute;top:100%;left:0;right:0;background:#fff;border-bottom:1px solid var(--black);padding:.5rem 1.25rem 1.25rem}
+  nav.open .mmenu{display:block}
+  .mmenu a{display:block;font:600 1.5rem var(--head);letter-spacing:-.02em;text-decoration:none;padding:1rem 0;border-bottom:1px solid var(--line)}
+  .hero{padding:1.75rem 0 3rem}
+  .brand{font-size:19.5vw;margin:0 0 1.5rem -.02em}
+  .hgrid{gap:1.25rem;padding-top:1.5rem}.hgrid h1{font-size:2.05rem;line-height:1.08}.hgrid p{font-size:1.05rem;margin-bottom:1.5rem}
+  .cta{flex-direction:column}.cta .btn{width:100%;padding:1.05rem 1.5rem}
+  h2{font-size:clamp(1.9rem,8.6vw,2.4rem)}.head{margin-bottom:1.6rem}.head p{font-size:1rem}
+  .grid{border-left:0}.cell{border-right:0;padding:1.4rem 0 1.6rem}.cell h3{font-size:1.2rem}
+  .three{gap:0}.three .stepx{padding:1.4rem 0 1.6rem}.three .stepx h3{font-size:1.5rem}.stepx p{font-size:1.05rem}
+  .products{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:1rem;margin:0 -1.25rem;padding:0 1.25rem 1.2rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .products::-webkit-scrollbar{display:none}
+  .products article{flex:0 0 82%;scroll-snap-align:start;padding:1.4rem 0 0}
+  .products .btn{width:100%}
+  .row{padding:1.4rem 0}.row h3{font-size:1.7rem}.row p{font-size:1rem}
+  dl div{flex-direction:column;gap:.25rem;padding:1.1rem 0}dd{text-align:left}
+  .line{display:none}
+  .cols{display:block;border-left:2px solid var(--line);margin-left:.45rem}
+  .cols>div{position:relative;padding:0 0 1.9rem 1.4rem}.cols>div:last-child{padding-bottom:0}
+  .cols>div::before{content:"";position:absolute;left:-7px;top:.4rem;width:12px;height:12px;border-radius:50%;background:var(--black)}
+  .cols h3{font-size:1.2rem}
+  .qa details{padding:1.15rem 0}.qa summary{font-size:1.1rem}
+  .closing{padding:3.5rem 0}.closing .wrap{gap:1.5rem}.closing h2{font-size:2.5rem;max-width:none}.closing p{font-size:1.05rem;margin:0 0 1.5rem}
+  footer{padding:2.5rem 0 2rem}.fgrid{grid-template-columns:1fr 1fr;gap:2rem 1.5rem}.fgrid>div:first-child{grid-column:1/-1}
+  .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;border-radius:0;border-width:1px 0 0;padding:1rem 1.25rem calc(1rem + env(safe-area-inset-bottom,0px));font-size:1rem;transition:transform .3s}
+  .mbar.hide{transform:translateY(110%)}
+}
 </style>
 </head>
 <body>
 <div class="ann">Group kits start at 10 mugs. <a href="https://wa.me/5511982026040?text=Hi%20Muggzy%2C%20I%20want%20a%20quote%20for%20a%20group%20kit." target="_blank" rel="noopener">Message us on WhatsApp</a></div>
 <nav><div class="wrap"><a class="logo" href="#top">muggzy</a>
 <ul><li><a href="#why">Why Muggzy</a></li><li><a href="#shop">Shop</a></li><li><a href="#occasions">Occasions</a></li><li><a href="#faq">FAQ</a></li>
-<li><a class="btn" href="https://wa.me/5511982026040?text=Hi%20Muggzy%2C%20I%20want%20to%20talk%20about%20the%20mug." target="_blank" rel="noopener">Contact us</a></li></ul></div></nav>
+<li><a class="btn" href="https://wa.me/5511982026040?text=Hi%20Muggzy%2C%20I%20want%20to%20talk%20about%20the%20mug." target="_blank" rel="noopener">Contact us</a></li></ul>
+<button class="mbtn" id="mbtn" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu"><i></i><i></i></button></div>
+<div class="mmenu" id="mmenu"><a href="#why">Why Muggzy</a><a href="#shop">Shop</a><a href="#occasions">Occasions</a><a href="#specs">Specifications</a><a href="#faq">FAQ</a></div></nav>
 
 <header class="hero" id="top"><div class="wrap">
   <div class="brand" role="img" aria-label="muggzy"><span aria-hidden="true">m</span><span aria-hidden="true">u</span><span aria-hidden="true">g</span><span aria-hidden="true">g</span><span aria-hidden="true">z</span><span aria-hidden="true">y</span><sup aria-hidden="true">™</sup></div>
@@ -192,6 +233,7 @@ footer p{max-width:36ch;margin-top:1rem}.legal{grid-column:1/-1;border-top:1px s
 <section class="closing" id="contact"><div class="wrap"><div><h2>Ready for hands-free parties?</h2></div>
 <div><p>Tell us about your group, your event, or your chapter. We answer on WhatsApp.</p><div class="cta"><a class="btn wh" href="https://wa.me/5511982026040?text=Hi%20Muggzy!" target="_blank" rel="noopener">Message us on WhatsApp</a></div></div></div></section>
 
+<a class="mbar btn" id="mbar" href="https://wa.me/5511982026040?text=Hi%20Muggzy!" target="_blank" rel="noopener">Message us on WhatsApp</a>
 <footer><div class="wrap fgrid"><div><a class="logo" href="#top">muggzy</a><p>The party mug that hangs on you. A student-founded brand in development, based in Tampa, Florida.</p></div>
 <div><h4>Explore</h4><a href="#why">Why Muggzy</a><a href="#shop">Shop</a><a href="#occasions">Occasions</a><a href="#faq">FAQ</a></div>
 <div><h4>Contact</h4><a href="https://wa.me/5511982026040?text=Hi%20Muggzy!" target="_blank" rel="noopener">WhatsApp</a><a href="https://wa.me/5511982026040?text=Hi%20Muggzy!" target="_blank" rel="noopener">(11) 98202-6040</a></div>
@@ -206,6 +248,11 @@ if(window.gsap&&window.ScrollTrigger&&!matchMedia('(prefers-reduced-motion:reduc
   gsap.from('.cell',{opacity:0,y:30,duration:.7,ease:'power3.out',stagger:.08,scrollTrigger:{trigger:'.grid',start:'top 82%'}});
   gsap.from('#prog',{scaleX:0,ease:'none',scrollTrigger:{trigger:'.line',start:'top 80%',end:'+=500',scrub:true}});
 }
+
+(function(){var n=document.querySelector('nav'),b=document.getElementById('mbtn');
+b.addEventListener('click',function(){var o=n.classList.toggle('open');b.setAttribute('aria-expanded',o);b.setAttribute('aria-label',o?'Close menu':'Open menu')});
+document.querySelectorAll('#mmenu a').forEach(function(a){a.addEventListener('click',function(){n.classList.remove('open');b.setAttribute('aria-expanded','false')})});
+if('IntersectionObserver' in window){var bar=document.getElementById('mbar');new IntersectionObserver(function(e){bar.classList.toggle('hide',e[0].isIntersecting)}).observe(document.getElementById('contact'));}})();
 </script>
 </body>
 </html>
