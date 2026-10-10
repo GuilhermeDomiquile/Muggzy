@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Muggzy | The party mug that hangs on you</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Fredoka:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+:root{--white:#fff;--black:#111;--blue:#1f4fe0;--grey:#f3f3f2;--line:#dcdcda;--muted:#5f5f5c;
+  --head:'Archivo','Helvetica Neue',Arial,sans-serif;--body:'Inter','Helvetica Neue',Arial,sans-serif;--logo:'Fredoka','Arial Rounded MT Bold',sans-serif;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--white);color:var(--black);font:400 1.0625rem/1.65 var(--body);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--head);font-weight:600;margin:0;line-height:1.05;letter-spacing:-.025em}
+h2{font-size:clamp(2.2rem,4.4vw,3.9rem)}h3{font-size:1.35rem;letter-spacing:-.015em}
+p{margin:0}a{color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.wrap{width:min(1280px,100% - 5rem);margin-inline:auto}
+section{padding:7.5rem 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;font:500 .98rem var(--body);padding:.95rem 1.7rem;border-radius:4px;background:var(--black);color:#fff;text-decoration:none;border:1px solid var(--black);cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.btn:hover{background:#fff;color:var(--black)}
+.btn.out{background:#fff;color:var(--black)}.btn.out:hover{background:var(--black);color:#fff}
+.btn.wh{background:#fff;color:var(--black);border-color:#fff}.btn.wh:hover{background:transparent;color:#fff}
+.btn.wo{background:transparent;color:#fff;border-color:#fff}.btn.wo:hover{background:#fff;color:var(--black)}
+.cta{display:flex;gap:.75rem;flex-wrap:wrap}
+.head{display:flex;justify-content:space-between;align-items:end;gap:3rem;margin-bottom:3.5rem}.head p{color:var(--muted);max-width:44ch}
+.ph{background:var(--grey);display:grid;place-items:center;color:#8c8c88;font-size:.9rem;text-align:center;padding:1rem}
+
+.ann{background:var(--black);color:#fff;text-align:center;font-size:.9rem;padding:.6rem 1rem}.ann a{text-underline-offset:3px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font:700 1.8rem var(--logo);color:var(--blue);text-decoration:none;letter-spacing:-.02em}
+nav ul{display:flex;align-items:center;gap:2.2rem;list-style:none;margin:0;padding:0}
+nav ul a:not(.btn){text-decoration:none;font-size:.95rem;font-weight:500;color:var(--black)}nav ul a:not(.btn):hover{text-decoration:underline;text-underline-offset:6px}
+nav .btn{padding:.6rem 1.2rem;font-size:.92rem}
+
+.hero{padding:4.5rem 0 7rem}
+.hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.brand{font:700 clamp(5.5rem,11vw,10rem)/.9 var(--logo);color:var(--blue);letter-spacing:-.045em;display:flex;margin-bottom:2.5rem;overflow:hidden;padding-bottom:.12em}
+.brand span{display:block}.brand sup{font-size:.15em;letter-spacing:0;margin:.5em 0 0 .25em}
+.hero h1{font-size:clamp(2.1rem,3.6vw,3.3rem);margin-bottom:1.4rem}
+.hero p{font-size:1.2rem;color:var(--muted);max-width:46ch;margin-bottom:2.2rem}
+.hero .ph{aspect-ratio:4/5;border-radius:6px}
+
+.why{border-top:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--black);border-left:1px solid var(--line)}
+.cell{padding:2.4rem 2.2rem 2.8rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:260px}
+.cell h3{margin-bottom:.9rem}.cell p{color:var(--muted)}
+
+.how{background:var(--grey)}
+.how .wrap{display:grid;grid-template-columns:1fr 1fr;gap:6rem}
+.frame{position:sticky;top:110px;align-self:start;height:calc(100vh - 150px);max-height:680px}
+.shot{position:absolute;inset:0;border-radius:6px;background:#e7e7e5;opacity:0;transition:opacity .5s}.shot.on{opacity:1}
+.stepx{min-height:72vh;display:flex;flex-direction:column;justify-content:center;gap:1rem}
+.stepx h3{font-size:clamp(2rem,3.4vw,3rem)}.stepx p{color:var(--muted);font-size:1.2rem;max-width:34ch}.stepx small{font:500 .95rem var(--body);color:var(--muted)}
+
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.pt{position:relative;aspect-ratio:4/5;border-radius:6px;margin-bottom:1.2rem}
+.badge{position:absolute;top:1rem;left:1rem;background:#fff;color:var(--black);font:500 .85rem var(--body);padding:.3rem .7rem;border-radius:3px}
+.pi{display:flex;justify-content:space-between;gap:1rem;align-items:baseline}.pi h3{font-size:1.2rem}.pi b{font:600 1.2rem var(--head)}
+.pd{color:var(--muted);margin:.35rem 0 1.1rem;font-size:1rem}
+.dots{display:flex;gap:.5rem;margin:.7rem 0 1.1rem;align-items:center;color:var(--muted);font-size:.95rem}.dots i{width:16px;height:16px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+
+.occ{border-top:1px solid var(--line)}
+.rows{border-bottom:1px solid var(--black)}
+.row{display:grid;grid-template-columns:1.1fr 1.2fr auto;gap:2rem;align-items:center;padding:2.2rem 0;border-top:1px solid var(--black);text-decoration:none;transition:padding .25s}
+.row:hover{padding-left:1rem}
+.row h3{font-size:clamp(1.8rem,3.2vw,2.8rem)}.row p{color:var(--muted)}.row em{font:500 .98rem var(--body);font-style:normal;text-decoration:underline;text-underline-offset:5px}
+
+.specs{background:var(--grey)}
+.split{display:grid;grid-template-columns:.8fr 1.2fr;gap:6rem}
+.note{margin-top:1.6rem;color:var(--muted);font-size:.98rem;max-width:48ch}
+dl{margin:0}dl div{display:flex;justify-content:space-between;gap:2rem;padding:1.2rem 0;border-top:1px solid var(--line)}dl div:first-child{border-top:1px solid var(--black)}dl div:last-child{border-bottom:1px solid var(--black)}
+dt{font:600 1.05rem var(--head)}dd{margin:0;color:var(--muted);text-align:right}
+
+.line{height:2px;background:var(--line);margin:0 0 2rem}.line i{display:block;height:100%;background:var(--black);transform-origin:0 50%}
+.cols{display:grid;grid-template-columns:repeat(5,1fr);gap:2rem}
+.cols b{font:500 .92rem var(--body);color:var(--muted)}.cols h3{font-size:1.25rem;margin:.45rem 0 .6rem}.cols p{color:var(--muted);font-size:.98rem}
+
+.faq{border-top:1px solid var(--line)}
+.qa details{border-top:1px solid var(--line);padding:1.4rem 0}.qa details:first-child{border-top:1px solid var(--black)}.qa details:last-child{border-bottom:1px solid var(--black)}
+.qa summary{font:600 1.2rem/1.3 var(--head);cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:1.5rem}
+.qa summary::-webkit-details-marker{display:none}.qa summary::after{content:"+";font-size:1.6rem;line-height:1;transition:transform .25s}.qa details[open] summary::after{transform:rotate(45deg)}
+.qa details p{color:var(--muted);margin-top:.9rem;max-width:58ch}
+
+.closing{background:var(--blue);color:#fff;padding:8rem 0}
+.closing .wrap{display:flex;justify-content:space-between;align-items:end;gap:4rem;flex-wrap:wrap}
+.closing h2{font-size:clamp(2.8rem,6.5vw,6rem);max-width:12ch}.closing p{color:#dce5ff;font-size:1.2rem;max-width:36ch;margin:1.5rem 0 2rem}
+footer{background:var(--black);color:#b9b9b5;padding:4rem 0 2.5rem;font-size:.97rem}
+.fgrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;align-items:start}
+footer .logo{color:#fff}footer h4{font:600 1rem var(--head);color:#fff;margin:0 0 1rem}
+footer a:not(.logo){display:block;text-decoration:none;margin-bottom:.5rem}footer a:not(.logo):hover{color:#fff;text-decoration:underline}
+footer p{max-width:36ch;margin-top:1rem}.legal{grid-column:1/-1;border-top:1px solid #333;padding-top:1.5rem;max-width:none!important;font-size:.9rem}
+
+@media(max-width:960px){
+  .wrap{width:calc(100% - 2.5rem)}section{padding:4.5rem 0}nav ul li:not(:last-child){display:none}
+  .hero{padding:2rem 0 4rem}.hero .wrap,.how .wrap,.split,.fgrid{grid-template-columns:1fr;gap:2.5rem}
+  .head{flex-direction:column;align-items:start;gap:1rem;margin-bottom:2.2rem}
+  .grid{grid-template-columns:1fr}.cell{min-height:0}
+  .frame{position:relative;top:0;height:auto;aspect-ratio:4/5}.shot:first-child{opacity:1}.stepx{min-height:0;padding:1rem 0}
+  .products{grid-template-columns:1fr}.row{grid-template-columns:1fr;gap:.6rem}.cols{grid-template-columns:1fr}.closing{padding:5rem 0}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+.hero{padding:3.5rem 0 6rem}.hero .wrap{display:block}
+.brand{font-size:clamp(6.5rem,22vw,20rem);margin:0 0 3rem -.03em;white-space:nowrap}
+.hgrid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:end;border-top:1px solid var(--black);padding-top:2rem}
+.hgrid h1{font-size:clamp(2.1rem,3.8vw,3.6rem);margin:0}.hgrid p{margin-bottom:2rem}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:3rem}.three .stepx{min-height:0;padding-top:1.6rem;border-top:1px solid var(--black);justify-content:flex-start}
+.tag{display:inline-block;font:500 .85rem var(--body);color:var(--muted);border:1px solid var(--line);border-radius:3px;padding:.2rem .65rem;margin-bottom:1rem}
+.products article{border-top:1px solid var(--black);padding-top:1.6rem}
+@media(max-width:960px){.hgrid{grid-template-columns:1fr;gap:1.5rem}.three{grid-template-columns:1fr;gap:2rem}.brand{margin-bottom:2rem}}
+</style>
+</head>
+<body>
+<div class="ann">Group kits start at 10 mugs. <a href="https://wa.me/5511982026040?text=Hi%20Muggzy%2C%20I%20want%20a%20quote%20for%20a%20group%20kit." target="_blank" rel="noopener">Message us on WhatsApp</a></div>
+<nav><div class="wrap"><a class="logo" href="#top">muggzy</a>
+<ul><li><a href="#why">Why Muggzy</a></li><li><a href="#shop">Shop</a></li><li><a href="#occasions">Occasions</a></li><li><a href="#faq">FAQ</a></li>
+<li><a class="btn" href="https://wa.me/5511982026040?text=Hi%20Muggzy%2C%20I%20want%20to%20talk%20about%20the%20mug." target="_blank" rel="noopener">Contact us</a></li></ul></div></nav>
+
+<header class="hero" id="top"><div class="wrap">
+  <div class="brand" role="img" aria-label="muggzy"><span aria-hidden="true">m</span><span aria-hidden="true">u</span><span aria-hidden="true">g</span><span aria-hidden="true">g</span><span aria-hidden="true">z</span><span aria-hidden="true">y</span><sup aria-hidden="true">™</sup></div>
+  <div class="hgrid"><h1>The party mug that hangs on you.</h1>
+  <div><p>Muggzy is a light insulated mug with a lid and a swappable strap. Wear it across your chest, let go, and it hangs upright, so your drink stays with you and both hands stay free. Made for graduations, Greek life, bachelorette parties, and tailgates.</p>
+  <div class="cta"><a class="btn" href="https://wa.me/5511982026040?text=Hi%20Muggzy%2C%20I%20want%20to%20talk%20about%20the%20mug." target="_blank" rel="noopener">Message us on WhatsApp</a></div></div></div>
+</div></header>
+
+<section class="why" id="why"><div class="wrap">
+<div class="head"><h2>What makes it different.</h2><p>A middle ground between a light aluminum mug and a heavy insulated tumbler, built to be worn.</p></div>
+<div class="grid">
+  <article class="cell"><h3>Hangs straight, hands free</h3><p>The strap clips to two opposite points above the mug's center of gravity, so it hangs upright like a bucket the moment you let go.</p></article>
+  <article class="cell"><h3>Lighter than a tumbler, colder than aluminum</h3><p>Insulated for a 3 hour party, and light enough to wear all night. We are aiming for 300 g or less.</p></article>
+  <article class="cell"><h3>Your drink stays with you</h3><p>A light lid snaps shut and opens with one hand. It cuts spills when you dance and helps make tampering harder.</p></article>
+  <article class="cell"><h3>Straps that swap in seconds</h3><p>Change colors for every event in about 10 seconds. The exclusive clip only fits Muggzy straps.</p></article>
+  <article class="cell"><h3>Made for your group</h3><p>Custom straps with your name, crest, or colors, plus collabs with frats, sororities, and student orgs.</p></article>
+  <article class="cell"><h3>Drink from a real mug</h3><p>Skip the bottle. Pour what you want and sip from a mug that goes wherever you go.</p></article>
+</div></div></section>
+
+<section class="how" id="how"><div class="wrap"><div class="head"><h2>How it works.</h2><p>Three moves, no tools.</p></div>
+<div class="three">
+<div class="stepx"><small>Step 1</small><h3>Clip it on</h3><p>The strap locks into two opposite points above the mug's center of gravity.</p></div>
+<div class="stepx"><small>Step 2</small><h3>Let go</h3><p>The mug swings, then hangs straight, like a bucket on a handle. Both hands are free.</p></div>
+<div class="stepx"><small>Step 3</small><h3>Swap it</h3><p>Change the strap in about 10 seconds with one hand. The clip only fits Muggzy straps.</p></div>
+</div></div></section>
+
+<section class="shop" id="shop"><div class="wrap">
+<div class="head"><h2>Shop the kit.</h2><p>Muggzy is in testing. Message us to reserve a spot in the first batch.</p></div>
+<div class="products">
+  <article><span class="tag">Coming soon</span><div class="pi"><h3>Mug, lid, and strap</h3><b>$29</b></div>
+    <div class="dots" aria-label="Strap colors"><i style="background:#ffd84d"></i><i style="background:#ff9ec4"></i><i style="background:#ff6a3d"></i><i style="background:#8fe3c2"></i><span>4 strap colors</span></div>
+    <a class="btn" href="https://wa.me/5511982026040?text=Hi%20Muggzy%2C%20I%20want%20to%20reserve%20a%20mug." target="_blank" rel="noopener">Reserve on WhatsApp</a></article>
+  <article><span class="tag">Coming soon</span><div class="pi"><h3>Extra strap</h3><b>$10</b></div><p class="pd">A new look for every event.</p>
+    <a class="btn out" href="https://wa.me/5511982026040?text=Hi%20Muggzy%2C%20I%20want%20to%20ask%20about%20extra%20straps." target="_blank" rel="noopener">Ask about straps</a></article>
+  <article><span class="tag">10 mugs or more</span><div class="pi"><h3>Custom group kit</h3><b>Up to 25% off</b></div><p class="pd">Your name, crest, or colors on every strap.</p>
+    <a class="btn out" href="https://wa.me/5511982026040?text=Hi%20Muggzy%2C%20I%20want%20a%20quote%20for%20a%20group%20kit." target="_blank" rel="noopener">Get a group quote</a></article>
+</div></div></section>
+
+<section class="occ" id="occasions"><div class="wrap">
+<div class="head"><h2>Pick your occasion.</h2><p>Custom straps with your name, crest, or colors. Groups start at 10 mugs.</p></div>
+<div class="rows">
+  <a class="row" href="https://wa.me/5511982026040?text=Hi%20Muggzy%2C%20I%20want%20a%20kit%20for%20graduation." target="_blank" rel="noopener"><h3>Graduation</h3><p>Class colors on every neck at the last big party.</p><em>Ask about this kit</em></a>
+  <a class="row" href="https://wa.me/5511982026040?text=Hi%20Muggzy%2C%20I%20want%20a%20kit%20for%20our%20chapter." target="_blank" rel="noopener"><h3>Frats and sororities</h3><p>Chapter straps for rush, formals, and game days.</p><em>Ask about this kit</em></a>
+  <a class="row" href="https://wa.me/5511982026040?text=Hi%20Muggzy%2C%20I%20want%20a%20kit%20for%20a%20bachelorette." target="_blank" rel="noopener"><h3>Bachelorette</h3><p>Matching straps, one for every person in the group.</p><em>Ask about this kit</em></a>
+  <a class="row" href="https://wa.me/5511982026040?text=Hi%20Muggzy%2C%20I%20want%20a%20kit%20for%20a%20tailgate." target="_blank" rel="noopener"><h3>Tailgates</h3><p>Team colors, with both hands free for the grill.</p><em>Ask about this kit</em></a>
+</div></div></section>
+
+<section class="specs" id="specs"><div class="wrap split"><div><h2>Specifications.</h2><p class="note">These are our v1 targets, and we will publish real test results as prototypes come in. The lid is designed to help make it harder for anyone to tamper with your drink. It does not guarantee protection.</p></div>
+<dl><div><dt>Weight, empty</dt><dd>300 g or less</dd></div><div><dt>Stays cold</dt><dd>10 °C or less after 3 hours, from a 4 °C start</dd></div><div><dt>Capacity</dt><dd>500 ml, about 17 oz</dd></div><div><dt>Cup holder</dt><dd>Base 7.5 cm or smaller</dd></div><div><dt>Lid</dt><dd>One hand, no drips upside down</dd></div><div><dt>Strap</dt><dd>Waterproof polyester, 90 to 150 cm, dries in 10 minutes</dd></div><div><dt>Dishwasher</dt><dd>50 cycles, no peeling or fading</dd></div><div><dt>Drop test</dt><dd>1 m, full, onto concrete</dd></div></dl></div></section>
+
+<section class="road" id="roadmap"><div class="wrap"><div class="head"><h2>The next 90 days.</h2><p>Our plan from final design to launch decision.</p></div><div class="line"><i id="prog"></i></div>
+<div class="cols">
+  <div><b>Weeks 1 to 2</b><h3>Finalize the product</h3><p>Size, material, lid, and the strap clip. First question: does it hang straight?</p></div>
+  <div><b>Weeks 2 to 4</b><h3>Find makers</h3><p>Quotes from at least three manufacturers, with minimums and samples.</p></div>
+  <div><b>Weeks 4 to 6</b><h3>Test prototypes</h3><p>Weight, comfort, cold, clip strength, and leaks.</p></div>
+  <div><b>Weeks 5 to 8</b><h3>Check the market</h3><p>Prototypes in front of USF students, and what they would pay.</p></div>
+  <div><b>Weeks 8 to 12</b><h3>Plan the launch</h3><p>Decide on the first batch, then packaging, photos, and launch plan.</p></div>
+</div></div></section>
+
+<section class="faq" id="faq"><div class="wrap split"><h2>Questions, answered.</h2><div class="qa">
+<details><summary>How long will drinks stay cold?</summary><p>Our v1 target is 10 °C or below after 3 hours, starting at 4 °C in a 30 °C room. We will publish real test results as prototypes come in.</p></details>
+<details><summary>Does it fit in a car cup holder?</summary><p>That is the target: a base of 7.5 cm or smaller. We will test it in three different cars.</p></details>
+<details><summary>Can I put it in the dishwasher?</summary><p>We are designing for 50 dishwasher cycles without peeling or fading, and we will confirm it in testing.</p></details>
+<details><summary>Does the lid stop people from spiking my drink?</summary><p>No lid can promise that. It is designed to help make it harder for anyone to tamper with your drink, so keep an eye on your cup.</p></details>
+<details><summary>How do group orders work?</summary><p>Groups start at 10 mugs with custom straps. Message us on WhatsApp with your group, your event, and the date.</p></details>
+<details><summary>When can I buy one?</summary><p>We are testing prototypes with USF students now. Message us to get on the list for the first batch.</p></details>
+</div></div></section>
+
+<section class="closing" id="contact"><div class="wrap"><div><h2>Ready for hands-free parties?</h2></div>
+<div><p>Tell us about your group, your event, or your chapter. We answer on WhatsApp.</p><div class="cta"><a class="btn wh" href="https://wa.me/5511982026040?text=Hi%20Muggzy!" target="_blank" rel="noopener">Message us on WhatsApp</a></div></div></div></section>
+
+<footer><div class="wrap fgrid"><div><a class="logo" href="#top">muggzy</a><p>The party mug that hangs on you. A student-founded brand in development, based in Tampa, Florida.</p></div>
+<div><h4>Explore</h4><a href="#why">Why Muggzy</a><a href="#shop">Shop</a><a href="#occasions">Occasions</a><a href="#faq">FAQ</a></div>
+<div><h4>Contact</h4><a href="https://wa.me/5511982026040?text=Hi%20Muggzy!" target="_blank" rel="noopener">WhatsApp</a><a href="https://wa.me/5511982026040?text=Hi%20Muggzy!" target="_blank" rel="noopener">(11) 98202-6040</a></div>
+<p class="legal">muggzy™ specs and prices are v1 targets and may change after testing.</p></div></footer>
+
+<script>
+if(window.gsap&&window.ScrollTrigger&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.from('.brand span',{yPercent:105,duration:.9,ease:'power4.out',stagger:.08});
+  gsap.from('.brand sup',{opacity:0,duration:.5,delay:.6});
+  gsap.from('.hero h1,.hero p,.hero .cta',{opacity:0,y:24,duration:.8,ease:'power3.out',stagger:.12,delay:.3});
+  gsap.from('.cell',{opacity:0,y:30,duration:.7,ease:'power3.out',stagger:.08,scrollTrigger:{trigger:'.grid',start:'top 82%'}});
+  gsap.from('#prog',{scaleX:0,ease:'none',scrollTrigger:{trigger:'.line',start:'top 80%',end:'+=500',scrub:true}});
+}
+</script>
+</body>
+</html>
